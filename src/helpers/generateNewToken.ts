@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { getDataFromToken } from "./getDatafromToken";
 
-export const checkTokenExpiration =(
+export const checkTokenExpiration = (
   request: NextRequest,
   response: NextResponse,
   next: any
@@ -11,7 +11,7 @@ export const checkTokenExpiration =(
 
   if (!token) {
     return NextResponse.json({
-      ststus: 401,
+      status: 401,
       message: "Access token missing",
     });
   }
@@ -21,6 +21,7 @@ export const checkTokenExpiration =(
 
     if (decodedToken.exp > Math.floor(Date.now() / 1000)) {
       //token has not expired
+      console.log("Token accepted");
       next();
     } else {
       // Token has expired, handle the authentication/authorization flow
@@ -53,13 +54,15 @@ export const checkTokenExpiration =(
         expiresIn: "1d",
       });
 
-      response.cookies.set("token", newAccessToken, { httpOnly: true, secure: true });
+      response.cookies.set("token", newAccessToken, {
+        httpOnly: true,
+        secure: true,
+      });
 
       return NextResponse.json({
-        status:201,
-        message:"New token generated successfully"
-      })
-
+        status: 201,
+        message: "New token generated successfully",
+      });
     }
   } catch (error) {
     console.log(error);
