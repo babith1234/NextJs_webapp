@@ -33,9 +33,9 @@ export async function POST(request: NextRequest) {
 
     //Create a new User
 
-    const newUser = await User.create({ ...reqBody, password: hashedPassword });
+    const newUser = await User.create({ ...reqBody, password: hashedPassword});
 
-    await sendEmail({ email, emailType: "VERIFY", userId: newUser._id });
+    await sendEmail({email, emailType: "VERIFY", userId: newUser._id});
 
     return NextResponse.json({
       message: "User created successfully",

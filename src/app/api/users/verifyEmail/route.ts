@@ -15,10 +15,13 @@ export async function POST(request: NextRequest) {
       verifyTokenExpiry: { $gt: Date.now() },
     });
 
+    console.log(user)
+
     if (!user) {
       return NextResponse.json({
         status: 501,
         message: "Invalid token",
+        success:false
       });
     }
 
@@ -31,11 +34,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       status: 201,
       message: "Email verified successfully",
+      success:true
     });
   } catch (error: any) {
     return NextResponse.json({
       status: 401,
       message: error.message,
+      success:false
     });
   }
 }

@@ -32,6 +32,7 @@ export default function SignUp() {
       serLoading(true);
       const response = await axios.post("/api/users/signup",user)
       alert("User registered successfully")
+      
       router.push("/login")
 
     } catch (error:any) {
@@ -44,16 +45,17 @@ export default function SignUp() {
 
   return (
     <>
+    <div className="h-1/2 w-1/2 border border-red rounded-3xl mx-auto mt-24">
       <h1 className="text-center text-4xl mt-20">
         {isLoading ? "PROCESSING..." : "SIGN UP"}
       </h1>
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center">
         <div className="flex-col">
           <div className="m-3">
             <label>Email</label>
             <input
               type="text"
-              className="ml-11 border rounded p-2 text-black"
+              className="ml-11 border rounded-3xl p-2 text-black"
               placeholder="Email"
               value={user.email}
               onChange={(e) => setuser({ ...user, email: e.target.value })}
@@ -63,7 +65,7 @@ export default function SignUp() {
             <label>Password</label>
             <input
               type="password"
-              className="m-3 border rounded p-2  text-black"
+              className="m-3 border rounded-3xl p-2  text-black"
               placeholder="password"
               value={user.password}
               onChange={(e) => setuser({ ...user, password: e.target.value })}
@@ -73,7 +75,7 @@ export default function SignUp() {
             <label>Username</label>
             <input
               type="text"
-              className="m-3 border rounded p-2 text-black"
+              className="m-3 border rounded-3xl p-2 text-black"
               placeholder="username"
               value={user.username}
               onChange={(e) => setuser({ ...user, username: e.target.value })}
@@ -91,6 +93,7 @@ export default function SignUp() {
             Visit login page
           </Link>
         </div>
+      </div>
       </div>
     </>
   );
